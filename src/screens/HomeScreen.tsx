@@ -23,6 +23,7 @@ import { IS_DESKTOP, Spacing } from "../constants/dimension";
 import { EthersContext } from "../context/EthersContext";
 import useColors from "../hooks/useColors";
 import useHomeState, { HomeState } from "../hooks/useHomeState";
+import useTokenUpdator from "../hooks/useTokenUpdator";
 import useLinker from "../hooks/useLinker";
 import useTranslation from "../hooks/useTranslation";
 import LPTokenWithValue from "../types/LPTokenWithValue";
@@ -43,6 +44,7 @@ interface LPTokenItemProps {
 const HomeScreen = () => {
     const t = useTranslation();
     const state = useHomeState();
+    useTokenUpdator();
     const { loadingTokens } = useContext(EthersContext);
     const loading = loadingTokens || state.loadingLPTokens || state.loadingPools;
     const totalValue = sum(state.tokens) + sum(state.lpTokens) + sum(state.pools);

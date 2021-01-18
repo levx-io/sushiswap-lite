@@ -36,6 +36,7 @@ import useColors from "../hooks/useColors";
 import useLinker from "../hooks/useLinker";
 import useSDK from "../hooks/useSDK";
 import useTranslation from "../hooks/useTranslation";
+import useTokenUpdator from "../hooks/useTokenUpdator";
 import MetamaskError from "../types/MetamaskError";
 import Token from "../types/Token";
 import { convertAmount, convertToken, formatBalance, isEmptyValue, isETH, isETHWETHPair, parseBalance } from "../utils";
@@ -43,6 +44,7 @@ import Screen from "./Screen";
 
 const LiquidityScreen = () => {
     const t = useTranslation();
+    useTokenUpdator();
     return (
         <Screen>
             <Container>

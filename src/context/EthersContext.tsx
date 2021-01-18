@@ -56,7 +56,8 @@ export const EthersContext = React.createContext({
     },
     getTotalSupply: async (_token: string) => {
         return ethers.constants.Zero as ethers.BigNumber | undefined;
-    }
+    },
+    setLoadingTokens: (_loadingToken: boolean) => {}
 });
 
 // tslint:disable-next-line:max-func-body-length
@@ -282,7 +283,8 @@ export const EthersContextProvider = ({ children }) => {
                 getTokenBalance,
                 getTotalSupply,
                 addOnBlockListener,
-                removeOnBlockListener
+                removeOnBlockListener,
+                setLoadingTokens
             }}>
             {children}
         </EthersContext.Provider>

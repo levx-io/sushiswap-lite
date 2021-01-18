@@ -1,7 +1,6 @@
+import { ethers } from "ethers";
 import React, { useCallback, useContext, useState } from "react";
 import { Platform, View } from "react-native";
-
-import { ethers } from "ethers";
 import useAsyncEffect from "use-async-effect";
 import AmountMeta from "../components/AmountMeta";
 import ApproveButton from "../components/ApproveButton";
@@ -34,6 +33,7 @@ import useColors from "../hooks/useColors";
 import useDelayedEffect from "../hooks/useDelayedEffect";
 import useLinker from "../hooks/useLinker";
 import useSwapState, { OrderType, SwapState } from "../hooks/useSwapState";
+import useTokenUpdator from "../hooks/useTokenUpdator";
 import useTranslation from "../hooks/useTranslation";
 import MetamaskError from "../types/MetamaskError";
 import Token from "../types/Token";
@@ -42,6 +42,7 @@ import Screen from "./Screen";
 
 const SwapScreen = () => {
     const t = useTranslation();
+    useTokenUpdator();
     return (
         <Screen>
             <Container>
