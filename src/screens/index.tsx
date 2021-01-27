@@ -13,6 +13,7 @@ import { EthersContext } from "../context/EthersContext";
 import { GlobalContext } from "../context/GlobalContext";
 import useColors from "../hooks/useColors";
 import EmptyScreen from "./EmptyScreen";
+import Text from "../components/Text";
 
 const FarmingScreen = lazy(() => import("./FarmingScreen"));
 const HarvestScreen = lazy(() => import("./HarvestScreen"));
@@ -28,7 +29,13 @@ const HomeScreen = lazy(() => import("./HomeScreen"));
 export const Screens = () => {
     const { load } = useContext(GlobalContext);
     useAsyncEffect(load, []);
-    return Platform.OS === "web" ? <WebScreens /> : <AppScreens />;
+    return Platform.OS === "web" ? (
+        <WebScreens />
+    ) : (
+        <Suspense fallback={() => <Text>Loading</Text>}>
+            <AppScreens />
+        </Suspense>
+    );
 };
 
 // tslint:disable-next-line:max-func-body-length

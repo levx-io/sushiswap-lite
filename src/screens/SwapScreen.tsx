@@ -54,7 +54,7 @@ const SwapScreen = () => {
                 </Content>
                 {Platform.OS === "web" && <WebFooter />}
             </Container>
-            <SwapSubMenu />
+            {Platform.OS === "web" && <SwapSubMenu />}
         </Screen>
     );
 };

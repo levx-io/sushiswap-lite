@@ -56,7 +56,7 @@ const LiquidityScreen = () => {
                 </Content>
                 {Platform.OS === "web" && <WebFooter />}
             </Container>
-            <LiquiditySubMenu />
+            {Platform.OS === "web" && <LiquiditySubMenu />}
         </Screen>
     );
 };

@@ -1,5 +1,6 @@
 import React from "react";
 
+import { Platform } from "react-native";
 import BackgroundImage from "../components/BackgroundImage";
 import Container from "../components/Container";
 import Content from "../components/Content";
@@ -18,7 +19,7 @@ const EmptyScreen = () => {
                     <Title text={t("loading")} />
                 </Content>
             </Container>
-            <WebSubMenu items={[]} />
+            {Platform.OS === "web" && <WebSubMenu items={[]} />}
         </Screen>
     );
 };

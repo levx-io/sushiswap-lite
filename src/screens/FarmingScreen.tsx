@@ -51,7 +51,7 @@ const FarmingScreen = () => {
                 </Content>
                 {Platform.OS === "web" && <WebFooter />}
             </Container>
-            <FarmingSubMenu />
+            {Platform.OS === "web" && <FarmingSubMenu />}
         </Screen>
     );
 };

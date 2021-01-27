@@ -1,31 +1,36 @@
-import React, { useContext, useEffect } from "react";
+import React, { Suspense, useContext, useEffect, lazy } from "react";
 import { Platform, View } from "react-native";
 import { useLocation } from "react-router-dom";
 
 import AppHeader from "../components/app/AppHeader";
 import Text from "../components/Text";
-import ConnectToWallet from "../components/web/ConnectToWallet";
 import { HEADER_HEIGHT } from "../constants/dimension";
 import { EthersContext } from "../context/EthersContext";
 import { GlobalContext } from "../context/GlobalContext";
 
 const Screen = props => {
+    if (Platform.OS !== "web") return <AppScreen {...props} />;
+
     const { setLocale } = useContext(GlobalContext);
+
     const query = useQuery();
+    const locale = query.get("locale");
     useEffect(() => {
-        const locale = query.get("locale");
         if (locale) {
             setLocale(locale);
         }
     }, [query]);
-    return Platform.select({
-        web: <WebScreen {...props} />,
-        default: <AppScreen {...props} />
-    });
+
+    return (
+        <Suspense fallback={() => <Text>Loading</Text>}>
+            <WebScreen {...props} />
+        </Suspense>
+    );
 };
 
 const WebScreen = props => {
     const { address, chainId } = useContext(EthersContext);
+    const ConnectToWallet = lazy(() => import("../components/web/ConnectToWallet"));
     if (!address) return <ConnectToWallet />;
     if (chainId !== 1)
         return (
@@ -44,10 +49,12 @@ const WebScreen = props => {
 };
 
 const AppScreen = props => (
-    <View style={{ width: "100%", height: "100%" }}>
-        <AppHeader />
-        <View {...props} style={[{ flex: 1 }, props.style]} />
-    </View>
+    <Suspense fallback={() => <Text>Loading</Text>}>
+        <View style={{ width: "100%", height: "100%" }}>
+            <AppHeader />
+            <View {...props} style={[{ flex: 1 }, props.style]} />
+        </View>
+    </Suspense>
 );
 
 const useQuery = () => {
