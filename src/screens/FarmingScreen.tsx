@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState } from "react";
-import { Platform, View } from "react-native";
+import { View } from "react-native";
 
 import useAsyncEffect from "use-async-effect";
 import AmountMeta from "../components/AmountMeta";
@@ -26,8 +26,6 @@ import Text from "../components/Text";
 import Title from "../components/Title";
 import TokenInput from "../components/TokenInput";
 import TokenLogo from "../components/TokenLogo";
-import WebFooter from "../components/web/WebFooter";
-import { FarmingSubMenu } from "../components/web/WebSubMenu";
 import { MASTER_CHEF } from "../constants/contracts";
 import { IS_DESKTOP, Spacing } from "../constants/dimension";
 import useColors from "../hooks/useColors";
@@ -49,9 +47,7 @@ const FarmingScreen = () => {
                     <Text light={true}>{t("plant-lp-tokens-desc")}</Text>
                     <Farming />
                 </Content>
-                {Platform.OS === "web" && <WebFooter />}
             </Container>
-            <FarmingSubMenu />
         </Screen>
     );
 };

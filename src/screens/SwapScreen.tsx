@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import React, { useCallback, useContext, useState } from "react";
-import { Platform, View } from "react-native";
+import { View } from "react-native";
 import useAsyncEffect from "use-async-effect";
 import AmountMeta from "../components/AmountMeta";
 import ApproveButton from "../components/ApproveButton";
@@ -23,8 +23,6 @@ import Title from "../components/Title";
 import TokenInput from "../components/TokenInput";
 import TokenSelect from "../components/TokenSelect";
 import UnsupportedButton from "../components/UnsupportedButton";
-import WebFooter from "../components/web/WebFooter";
-import { SwapSubMenu } from "../components/web/WebSubMenu";
 import { ROUTER, SETTLEMENT } from "../constants/contracts";
 import { IS_DESKTOP, Spacing } from "../constants/dimension";
 import Fraction from "../constants/Fraction";
@@ -52,9 +50,7 @@ const SwapScreen = () => {
                     <Text light={true}>{t("new-order-desc")}</Text>
                     <Swap />
                 </Content>
-                {Platform.OS === "web" && <WebFooter />}
             </Container>
-            <SwapSubMenu />
         </Screen>
     );
 };
